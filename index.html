@@ -153,19 +153,24 @@
       color: #999;
       margin-top: 2px;
     }
-#historique {
-  display: none;
+    #historique {
+    display: none;
+    }
+    #numero
+    {
+    text-transform: uppercase;
+    }
+      
+input::placeholder {
+  text-transform: none;
+  font-variant: normal;
 }
-      #numero
-      {
-          text-transform: uppercase;
-      }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <img src="img/blackcow.png" alt="Logo" class="logo" />
+    <img src="img/carte.jpg" alt="Logo" class="logo" />
     <h1>Vérifiez l'authenticité <br>d'une carte</h1>
     <input type="text" id="numero" placeholder="Entrez le numéro" autofocus />
     <button onclick="verifierNumero()">Vérifier</button>
