@@ -8,6 +8,7 @@
     @font-face { font-family: gothambold; src: url(font/GothamBold.ttf); }
     @font-face { font-family: gotham; src: url(font/GothamBook.ttf); }
     * { font-family: gotham; }
+
     body {
       background-color: #f0f4f8;
       color: #333;
@@ -19,7 +20,41 @@
       height: 100vh;
       text-align: center;
       user-select: none;
+      flex-direction: column;
     }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab-button {
+      padding: 0.5rem 1rem;
+      font-family: gothambold;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #ddd;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .tab-button.active {
+      background-color: #449947;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
     .container {
       background: #fff;
       border-radius: 10px;
@@ -29,12 +64,14 @@
       width: 100%;
       position: relative;
     }
+
     h1 {
       font-size: 1.8rem;
       color: #449947;
       margin-bottom: 1rem;
       font-weight: 600;
     }
+
     input, button {
       padding: 1rem;
       font-size: 1rem;
@@ -44,11 +81,13 @@
       border-radius: 6px;
       box-sizing: border-box;
     }
+
     input:focus, button:focus {
       border-color: #449947;
       outline: none;
       box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
     }
+
     button {
       font-family: gothambold;
       background-color: #000;
@@ -56,15 +95,20 @@
       cursor: pointer;
       transition: background-color 0.3s ease, transform 0.2s ease;
     }
+
     button:hover {
       background-color: #449947;
+      color:#fff;
     }
+
     button:active {
       transform: scale(0.97);
     }
+
     .result-container {
       margin-top: 1.5rem;
     }
+
     .info-text {
       font-size: 1rem;
       color: #555;
@@ -72,33 +116,41 @@
       transition: opacity 0.3s ease;
       font-weight: bold;
     }
+
     .error {
       color: #f44336;
       font-weight: 500;
       margin-top: 1rem;
     }
+
     .hidden {
       display: none;
     }
+
     .fade-in {
       opacity: 0;
       animation: fadeIn 1s ease forwards;
     }
+
     @keyframes fadeIn {
       to { opacity: 1; }
     }
+
     .shake {
       animation: shake 0.15s;
     }
+
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       25% { transform: translateX(-5px); }
       75% { transform: translateX(5px); }
     }
+
     input.erreur {
       border-color: #f44336;
       box-shadow: 0 0 8px rgba(244, 67, 54, 0.5);
     }
+
     .logo {
       width: 80px;
       height: auto;
@@ -107,18 +159,21 @@
       transition: transform 0.2s ease;
       border-radius: 100%;
     }
+
     .image-wrapper {
       perspective: 1000px;
       display: inline-block;
       transition: transform 0.2s ease;
       margin-top: 1rem;
     }
+
     .image-wrapper img {
       transition: transform 0.2s ease, box-shadow 0.9s ease;
       border-radius: 10px;
       will-change: transform;
       max-width: 100%;
     }
+
     .image-wrapper:hover img {
       box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
     }
@@ -129,65 +184,90 @@
       font-size: 0.9rem;
       color: #555;
     }
+
     .history-title {
       font-weight: bold;
       margin-bottom: 0.5rem;
       color: #333;
     }
+
     .history ul {
       padding-left: 1rem;
       margin: 0;
     }
+
     .history li {
       cursor: pointer;
       margin-bottom: 0.3rem;
       transition: color 0.2s ease;
     }
+
     .history li:hover {
       color: #449947;
       text-decoration: underline;
     }
+
     .history small {
       display: block;
       font-size: 0.75rem;
       color: #999;
       margin-top: 2px;
     }
+
     #historique {
-    display: none;
+      display: none;
     }
-    #numero
-    {
-    text-transform: uppercase;
+
+    #numero {
+      text-transform: uppercase;
     }
-      
-input::placeholder {
-  text-transform: none;
-  font-variant: normal;
-}
+
+    input::placeholder {
+      text-transform: none;
+      font-variant: normal;
+    }
   </style>
 </head>
 <body>
 
+  <div class="tabs">
+    <button class="tab-button active" onclick="switchTab(event, 'verif')">Vérification</button>
+    <button class="tab-button" onclick="switchTab(event, 'info')">À propos</button>
+  </div>
+
   <div class="container">
-    <img src="img/carte.jpg" alt="Logo" class="logo" />
-    <h1>Vérifiez l'authenticité <br>d'une carte</h1>
-    <input type="text" id="numero" placeholder="Entrez le numéro" autofocus />
-    <button onclick="verifierNumero()">Vérifier</button>
 
-    <div id="resultat" class="result-container">
-      <div class="image-wrapper hidden" id="imageWrapper">
-        <img id="imageAuthentique" src="" alt="" />
+    <div class="tab-content active" id="verif">
+      <img src="img/carte.jpg" alt="Logo" class="logo" />
+      <h1>Vérifiez l'authenticité <br>d'une carte</h1>
+      <input type="text" id="numero" placeholder="Entrez le numéro" autofocus />
+      <button onclick="verifierNumero()">Vérifier</button>
+
+      <div id="resultat" class="result-container">
+        <div class="image-wrapper hidden" id="imageWrapper">
+          <img id="imageAuthentique" src="" alt="" />
+        </div>
+        <p id="ligne1" class="info-text hidden"></p>
+        <p id="ligne2" class="info-text hidden"></p>
+        <p id="message" class="error hidden"></p>
       </div>
-      <p id="ligne1" class="info-text hidden"></p>
-      <p id="ligne2" class="info-text hidden"></p>
-      <p id="message" class="error hidden"></p>
+
+      <div class="history" id="historique">
+        <p class="history-title">Historique des recherches :</p>
+        <ul id="listeHistorique"></ul>
+      </div>
     </div>
 
-    <div class="history" id="historique">
-      <p class="history-title">Historique des recherches :</p>
-      <ul id="listeHistorique"></ul>
+    <div class="tab-content" id="info">
+      <img src="img/carte.jpg" alt="Logo" class="logo" />
+        <h1>À propos</h1>
+      <h3>"Je suis simplement ce que je suis"</h3>
+      <p> contact: <a href="mailto:blackcow-art@outlook.com">blackcow-art@outlook.com</a></p>
+      <p>Ce site vous permet de vérifier l'authenticité des cartes BlackCow Art.</p>
+      <p>Les données sont vérifiées localement à partir d’une base embarquée.</p>
+      
     </div>
+
   </div>
 
   <script>
@@ -198,14 +278,14 @@ input::placeholder {
         ligne2: "CC-BY-NC-SA"
       },
       "67890": {
-        image: "data:image/jpeg;base64,/9j/4AAQSkZJRgXLxKQyqi4PjzYL1qnIpEJY9u2K/KsyqSoga7FIXLyp0IqevoLeCcXmPTk1hQLYtaqtRtJRVtM+lm45qOVyKjHJmxxTtwX1l9Y1GMaxqIiNTBETkQh7VatRb9mwNyVycqV+bFURM3sXFU9hNHbzzEcORHuQAFaSuX85hTXN2KZ4aHfzmFNc3YpnhpxdVV9hrFhcxUGoZuoZOaxYXMVBqGbqHM2odo7iicIXONLql2l7KJwhc40uqXaV4uyVtKodVl860evZvIcp1WXzrR69m8hpnSprgAMS9ll5dIa3WKRhJ3l0hrdYpGG2uoUztYric/8A3LvA0Qzu4nP/ANy7wNEM2Xsspp5Vfmk2",
+        image: "data:image/jpeg;base64,...", // Remplacez par image base64
         ligne1: "67890",
         ligne2: "CC-BY-NC-SA"
       },
       "11111": {
-        image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA...",  // Remplacer par base64 réel
+        image: "data:image/png;base64,...", // Remplacez par image base64
         ligne1: "Produit Gamma",
-        ligne2: "Qualité certifiée, numéro unique"
+        ligne2: "Qualité certifiée"
       }
     };
 
@@ -229,77 +309,69 @@ input::placeholder {
       verifierNumero();
     }
 
-function verifierNumero() {
-  const input = document.getElementById("numero");
-  const numero = input.value.trim().toUpperCase().replace(/\s+/g, '');
-  const image = document.getElementById("imageAuthentique");
-  const wrapper = document.getElementById("imageWrapper");
-  const message = document.getElementById("message");
-  const ligne1 = document.getElementById("ligne1");
-  const ligne2 = document.getElementById("ligne2");
-  const historiqueSection = document.getElementById("historique");
+    function verifierNumero() {
+      const input = document.getElementById("numero");
+      const numero = input.value.trim().toUpperCase().replace(/\s+/g, '');
+      const image = document.getElementById("imageAuthentique");
+      const wrapper = document.getElementById("imageWrapper");
+      const message = document.getElementById("message");
+      const ligne1 = document.getElementById("ligne1");
+      const ligne2 = document.getElementById("ligne2");
+      const historiqueSection = document.getElementById("historique");
 
-  const produit = infosProduits[numero];
+      const produit = infosProduits[numero];
 
-  if (produit) {
-    // Affichage des informations
-    image.src = produit.image;
-    image.alt = `Image de : ${produit.ligne1}`;
-    wrapper.classList.remove("hidden", "fade-in");
-    void wrapper.offsetWidth;
-    wrapper.classList.add("fade-in");
+      if (produit) {
+        image.src = produit.image;
+        image.alt = `Image de : ${produit.ligne1}`;
+        wrapper.classList.remove("hidden", "fade-in");
+        void wrapper.offsetWidth;
+        wrapper.classList.add("fade-in");
 
-    ligne1.textContent = produit.ligne1;
-    ligne2.textContent = produit.ligne2;
-    ligne1.classList.remove("hidden");
-    ligne2.classList.remove("hidden");
-    ligne1.classList.add("fade-in");
-    ligne2.classList.add("fade-in");
+        ligne1.textContent = produit.ligne1;
+        ligne2.textContent = produit.ligne2;
+        ligne1.classList.remove("hidden");
+        ligne2.classList.remove("hidden");
+        ligne1.classList.add("fade-in");
+        ligne2.classList.add("fade-in");
 
-    // Masquer le message d'erreur
-    message.classList.add("hidden");
-    input.classList.remove("erreur", "shake");
+        message.classList.add("hidden");
+        input.classList.remove("erreur", "shake");
 
-    // Ajouter à l'historique si pas déjà dedans
-    if (!historique.some(item => item.numero === numero)) {
-      const now = new Date();
-      const dateStr = now.toLocaleString();
-      historique.unshift({ numero, date: dateStr });
-      if (historique.length > 50) historique.pop();
-      enregistrerHistorique();
+        if (!historique.some(item => item.numero === numero)) {
+          const now = new Date();
+          const dateStr = now.toLocaleString();
+          historique.unshift({ numero, date: dateStr });
+          if (historique.length > 50) historique.pop();
+          enregistrerHistorique();
+        }
+
+        afficherHistorique();
+        historiqueSection.style.display = 'block';
+
+      } else {
+        image.src = "";
+        image.alt = "";
+        wrapper.classList.add("hidden");
+        ligne1.classList.add("hidden");
+        ligne2.classList.add("hidden");
+
+        message.innerHTML = "Numéro invalide ou inconnu.<br>Je ne suis pas à l'origine de cette carte.";
+        message.classList.remove("hidden", "shake");
+        void message.offsetWidth;
+        message.classList.add("shake");
+
+        input.classList.remove("shake");
+        input.classList.add("erreur");
+        void input.offsetWidth;
+        input.classList.add("shake");
+
+        setTimeout(() => {
+          message.classList.remove("shake");
+          input.classList.remove("shake");
+        }, 500);
+      }
     }
-
-    // Afficher l'historique
-    afficherHistorique();
-
-    // Affiche la section
-    historiqueSection.style.display = 'block';
-
-  } else {
-    // Numéro invalide
-    image.src = "";
-    image.alt = "";
-    wrapper.classList.add("hidden");
-    ligne1.classList.add("hidden");
-    ligne2.classList.add("hidden");
-
-    message.innerHTML = "Numéro invalide ou inconnu.<br>Je ne suis pas à l'origine de cette carte.";
-    message.classList.remove("hidden", "shake");
-    void message.offsetWidth;
-    message.classList.add("shake");
-
-    input.classList.remove("shake");
-    input.classList.add("erreur");
-    void input.offsetWidth;
-    input.classList.add("shake");
-
-    setTimeout(() => {
-      message.classList.remove("shake");
-      input.classList.remove("shake");
-    }, 500);
-  }
-}
-
 
     document.getElementById("numero").addEventListener("keydown", function(event) {
       if (event.key === "Enter") verifierNumero();
@@ -320,9 +392,19 @@ function verifierNumero() {
       wrapper.style.transform = `rotateX(0) rotateY(0)`;
     });
 
+    function switchTab(event, tabId) {
+      document.querySelectorAll('.tab-button').forEach(btn =>
+        btn.classList.remove('active')
+      );
+      document.querySelectorAll('.tab-content').forEach(content =>
+        content.classList.remove('active')
+      );
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
     window.addEventListener("load", afficherHistorique);
 
-    // 🔒 Bloque F12, Ctrl+U, Ctrl+Shift+I
     document.addEventListener("keydown", function (e) {
       if (e.key === "F12" ||
           (e.ctrlKey && e.key.toLowerCase() === "u") ||
@@ -332,10 +414,9 @@ function verifierNumero() {
       }
     });
 
-    // 🔒 Bloque clic droit sauf champ
-document.addEventListener('contextmenu', function(event) {
-    event.preventDefault();  // Annule l'action par défaut du clic droit
-  });
+    document.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
+    });
   </script>
 
 </body>
