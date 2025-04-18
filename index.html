@@ -153,6 +153,9 @@
       color: #999;
       margin-top: 2px;
     }
+#historique {
+  display: none;
+}
   </style>
 </head>
 <body>
@@ -225,11 +228,12 @@ function verifierNumero() {
   const message = document.getElementById("message");
   const ligne1 = document.getElementById("ligne1");
   const ligne2 = document.getElementById("ligne2");
+  const historiqueSection = document.getElementById("historique");
 
   const produit = infosProduits[numero];
 
   if (produit) {
-    // Affichage des informations du produit
+    // Affichage des informations
     image.src = produit.image;
     image.alt = `Image de : ${produit.ligne1}`;
     wrapper.classList.remove("hidden", "fade-in");
@@ -247,7 +251,7 @@ function verifierNumero() {
     message.classList.add("hidden");
     input.classList.remove("erreur", "shake");
 
-    // Ajouter l'élément à l'historique local
+    // Ajouter à l'historique si pas déjà dedans
     if (!historique.some(item => item.numero === numero)) {
       const now = new Date();
       const dateStr = now.toLocaleString();
@@ -259,12 +263,11 @@ function verifierNumero() {
     // Afficher l'historique
     afficherHistorique();
 
-    // Rendre visible la section de l'historique si un historique valide existe
-    const historiqueSection = document.getElementById("historique");
-    historiqueSection.style.display = historique.length > 0 ? 'block' : 'none';
+    // Affiche la section
+    historiqueSection.style.display = 'block';
 
   } else {
-    // Gestion du cas numéro invalide
+    // Numéro invalide
     image.src = "";
     image.alt = "";
     wrapper.classList.add("hidden");
