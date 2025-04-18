@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vérification de numéro</title>
+  <title>BlackCow Art</title>
   <style>
     @font-face { font-family: gothambold; src: url(font/GothamBold.ttf); }
     @font-face { font-family: gotham; src: url(font/GothamBook.ttf); }
@@ -321,9 +321,9 @@ function verifierNumero() {
     });
 
     // 🔒 Bloque clic droit sauf champ
-    document.addEventListener("contextmenu", function (e) {
-      if (e.target.id !== "numero") e.preventDefault();
-    });
+document.addEventListener('contextmenu', function(event) {
+    event.preventDefault();  // Annule l'action par défaut du clic droit
+  });
   </script>
 
 </body>
