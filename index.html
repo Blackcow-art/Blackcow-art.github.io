@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BlackCow Art</title>
+  <link rel="icon" type="image/x-icon" href="img/favicon.png">
   <style>
     @font-face { font-family: gothambold; src: url(font/GothamBold.ttf); }
     @font-face { font-family: gotham; src: url(font/GothamBook.ttf); }
@@ -29,9 +30,8 @@
       gap: 1rem;
       margin-bottom: 1rem;
     }
-
     .tab-button {
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 1.2rem;
       font-family: gothambold;
       font-size: 1rem;
       border: none;
@@ -40,8 +40,10 @@
       color: #333;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      white-space: nowrap;         /* 👈 empêche le retour à la ligne */
+      min-width: 120px;            /* 👈 force une largeur suffisante */
+      text-align: center;
     }
-
     .tab-button.active {
       background-color: #449947;
       color: white;
@@ -159,7 +161,14 @@
       transition: transform 0.2s ease;
       border-radius: 100%;
     }
-
+    .vache {
+      width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease;
+      border-radius: 10px;
+    }
     .image-wrapper {
       perspective: 1000px;
       display: inline-block;
@@ -233,6 +242,7 @@
   <div class="tabs">
     <button class="tab-button active" onclick="switchTab(event, 'verif')">Vérification</button>
     <button class="tab-button" onclick="switchTab(event, 'info')">À propos</button>
+    <button class="tab-button" onclick="switchTab(event, 'vache')">Vache</button>
   </div>
 
   <div class="container">
@@ -265,9 +275,15 @@
       <p> contact: <a href="mailto:blackcow-art@outlook.com">blackcow-art@outlook.com</a></p>
      <!-- <p>Ce site vous permet de vérifier l'authenticité des cartes BlackCow Art.</p>
       <p>Les données sont vérifiées localement à partir d’une base embarquée.</p>-->
-      
     </div>
 
+    <div class="tab-content" id="vache">
+      <img src="img/carte.jpg" alt="Logo" class="logo" />
+        <h1>Vache</h1>
+      <img src="img/vache.webp" alt="Vache" class="vache" />
+      <img src="img/vache2.webp" alt="Vache" class="vache" />
+    </div>
+      
   </div>
 
   <script>
@@ -417,6 +433,7 @@
     document.addEventListener('contextmenu', function(event) {
       event.preventDefault();
     });
+      
   </script>
 
 </body>
