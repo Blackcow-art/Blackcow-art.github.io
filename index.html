@@ -10,25 +10,49 @@
     @font-face { font-family: gotham; src: url(font/GothamBook.ttf); }
     * { font-family: gotham; }
 
-    body {
-      background-color: #f0f4f8;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      user-select: none;
-      flex-direction: column;
-    }
+ body {
+  background-color: #f0f4f8;
+  color: #333;
+  margin: 0;
+  padding: 2rem 0; /* Ajoute un peu de marge en haut/bas */
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  user-select: none;
+  flex-direction: column;
+  min-height: 100vh; /* Pour permettre à la page de s'étendre */
+  box-sizing: border-box;
+}
+
+.tot {
+  height: auto;
+  width: 90%;
+  height: auto;
+  position: relative;
+  margin: auto;
+}
+
+.container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  margin: auto;
+}
 
     .tabs {
       display: flex;
       justify-content: center;
       gap: 1rem;
       margin-bottom: 1rem;
+      max-width: 400px;
+      width: 100%;
+         position: relative;
+      margin: auto;
+        padding-bottom: 1rem;
     }
     .tab-button {
       padding: 0.5rem 1.2rem;
@@ -57,15 +81,6 @@
       display: block;
     }
 
-    .container {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-      padding: 2rem;
-      max-width: 400px;
-      width: 100%;
-      position: relative;
-    }
 
     h1 {
       font-size: 1.8rem;
@@ -239,12 +254,14 @@
 </head>
 <body>
 
+
+
+<div class="tot">
   <div class="tabs">
     <button class="tab-button active" onclick="switchTab(event, 'verif')">Vérification</button>
     <button class="tab-button" onclick="switchTab(event, 'info')">À propos</button>
     <button class="tab-button" onclick="switchTab(event, 'vache')">Vache</button>
   </div>
-
   <div class="container">
 
     <div class="tab-content active" id="verif">
@@ -272,7 +289,7 @@
       <img src="img/carte.jpg" alt="Logo" class="logo" />
         <h1>À propos</h1>
       <h3>"Je suis simplement ce que je suis"</h3>
-      <p> contact: <a href="mailto:blackcow-art@outlook.com">blackcow-art@outlook.com</a></p>
+      <p> Toute remarque, proposition ou question est la bienvenue. Ensemble, on va plus loin.<br> <a href="mailto:blackcow-art@outlook.com">blackcow-art@outlook.com</a></p>
      <!-- <p>Ce site vous permet de vérifier l'authenticité des cartes BlackCow Art.</p>
       <p>Les données sont vérifiées localement à partir d’une base embarquée.</p>-->
     </div>
@@ -280,12 +297,14 @@
     <div class="tab-content" id="vache">
       <img src="img/carte.jpg" alt="Logo" class="logo" />
         <!--<h1>Vache</h1>-->
-      <img src="img/vache.webp" alt="Vache" class="vache" />
+      <img src="img/vache1.jpg" alt="Vache" class="vache" />
       <img src="img/vache2.webp" alt="Vache" class="vache" />
+      <img src="img/vache3.jpg" alt="Vache" class="vache" />
     </div>
       
   </div>
-
+</div>
+    
   <script>
     const infosProduits = {
       "V5W696L1CV": {
